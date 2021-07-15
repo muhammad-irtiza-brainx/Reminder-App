@@ -33,11 +33,11 @@ class ReminderDetailViewController: UITableViewController {
             case .title:
                 return nil
             case .date:
-                return UIImage(systemName: "calendar.circle")
+                return UIImage(systemName: Images.calenderCirceImage)
             case .time:
-                return UIImage(systemName: "clock")
+                return UIImage(systemName: Images.clockImage)
             case .notes:
-                return UIImage(systemName: "square.and.pencil")
+                return UIImage(systemName: Images.squareAndPencil)
             }
         }
     }
@@ -51,6 +51,7 @@ class ReminderDetailViewController: UITableViewController {
 }
 
 extension ReminderDetailViewController {
+    
     static let reminderDetailCellIdentifier = "ReminderDetailCell"
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -8,16 +8,13 @@
 import UIKit
 
 class ReminderListCell: UITableViewCell {
+    
     typealias DoneButtonAction = () -> Void
     
-    @IBOutlet
-    var dateLabel: UILabel!
-    
-    @IBOutlet
-    var titleLabel: UILabel!
-    
-    @IBOutlet
-    var doneButton: UIButton!
+    //MARK:- Outlets
+    @IBOutlet var dateLabel: UILabel!
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var doneButton: UIButton!
     
     var doneButtonAction: DoneButtonAction?
     

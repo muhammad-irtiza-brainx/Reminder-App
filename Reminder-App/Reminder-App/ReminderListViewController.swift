@@ -8,8 +8,12 @@
 import UIKit
 
 class ReminderListViewController: UITableViewController {
-    static let showDetailSegueIdentifier = "ShowReminderDetailSegue"
     
+    //MARK:- Identifiers
+    static let showDetailSegueIdentifier = "ShowReminderDetailSegue"
+    static let reminderListCellIdentifier = "ReminderListCell"
+    
+    //MARK:- Overridden Method
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         guard segue.identifier == Self.showDetailSegueIdentifier,
@@ -24,8 +28,8 @@ class ReminderListViewController: UITableViewController {
     }
 }
 
+//MARK:- UITableViewController
 extension ReminderListViewController {
-    static let reminderListCellIdentifier = "ReminderListCell"
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Reminder.testData.count
@@ -37,7 +41,7 @@ extension ReminderListViewController {
         }
         
         let reminder = Reminder.testData[indexPath.row]
-        let image = reminder.isComplete ? UIImage(systemName: "circle.fill") : UIImage(systemName: "circle")
+        let image = reminder.isComplete ? UIImage(systemName: Images.circleFilledImage) : UIImage(systemName: Images.circleUnfilledImage)
         
         cell.titleLabel.text = reminder.title
         cell.dateLabel.text = reminder.dueDate.description
