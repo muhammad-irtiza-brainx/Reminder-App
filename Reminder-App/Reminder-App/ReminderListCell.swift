@@ -8,7 +8,6 @@
 import UIKit
 
 class ReminderListCell: UITableViewCell {
-    
     typealias DoneButtonAction = () -> Void
     
     @IBOutlet var dateLabel: UILabel!

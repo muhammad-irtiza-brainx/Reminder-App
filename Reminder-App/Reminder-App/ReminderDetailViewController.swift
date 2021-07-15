@@ -16,7 +16,6 @@ class ReminderDetailViewController: UITableViewController {
         case notes
         
         func displayText(for reminder: Reminder?) -> String? {
-            
             switch self {
             case .title:
                 return reminder?.title
@@ -27,7 +26,6 @@ class ReminderDetailViewController: UITableViewController {
             case .notes:
                 return reminder?.notes
             }
-            
         }
         
         var cellImage: UIImage? {
