@@ -12,15 +12,15 @@ class ReminderListViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == Self.showDetailSegueIdentifier,
+        guard segue.identifier == Self.showDetailSegueIdentifier,
            let destination = segue.destination as? ReminderDetailViewController,
            let cell = sender as? UITableViewCell,
-           let indexPath = tableView.indexPath(for: cell) {
-            
-            let reminder = Reminder.testData[indexPath.row]
-            
-            destination.configure(with: reminder)
+           let indexPath = tableView.indexPath(for: cell) else {
+            return
         }
+        
+        let reminder = Reminder.testData[indexPath.row]
+        destination.configure(with: reminder)
     }
 }
 

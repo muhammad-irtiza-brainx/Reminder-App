@@ -10,13 +10,19 @@ import UIKit
 class ReminderListCell: UITableViewCell {
     typealias DoneButtonAction = () -> Void
     
-    @IBOutlet var dateLabel: UILabel!
-    @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var doneButton: UIButton!
+    @IBOutlet
+    var dateLabel: UILabel!
+    
+    @IBOutlet
+    var titleLabel: UILabel!
+    
+    @IBOutlet
+    var doneButton: UIButton!
     
     var doneButtonAction: DoneButtonAction?
     
-    @IBAction func doneButtonTriggered(_ sender: UIButton) {
+    @IBAction
+    func doneButtonTriggered(_ sender: UIButton) {
         doneButtonAction?()
     }
 }
