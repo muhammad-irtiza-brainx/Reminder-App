@@ -15,6 +15,7 @@ class ReminderDetailViewDataSource: NSObject {
         case time
         case notes
         
+        // MARK:- Static Properties
         static let timeFormatter: DateFormatter = {
             let formatter = DateFormatter()
             
@@ -33,6 +34,7 @@ class ReminderDetailViewDataSource: NSObject {
             return formatter
         }()
         
+        // MARK:- Instance Methods
         func displayText(for reminder: Reminder?) -> String? {
             switch self {
             case .title:
@@ -48,6 +50,7 @@ class ReminderDetailViewDataSource: NSObject {
             }
         }
         
+        // MARK:- Computed Properties
         var cellImage: UIImage? {
             switch self {
             case .title:
@@ -75,8 +78,10 @@ class ReminderDetailViewDataSource: NSObject {
 // MARK:- Data Source Methods
 extension ReminderDetailViewDataSource: UITableViewDataSource {
     
+    // MARK:- Static Properties
     static let reminderDetailCellIdentifier = "ReminderDetailCell"
     
+    // MARK:- Lifecycle Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ReminderRow.allCases.count
     }

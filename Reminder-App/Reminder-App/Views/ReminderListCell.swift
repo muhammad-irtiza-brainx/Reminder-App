@@ -17,7 +17,6 @@ class ReminderListCell: UITableViewCell {
     @IBOutlet var doneButton: UIButton!
     
     //MARK:- Private Property
-//    private var doneButtonAction: DoneButtonAction?
     var doneButtonAction: DoneButtonAction?
     
     //MARK:- Actions

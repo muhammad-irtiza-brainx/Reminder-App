@@ -8,14 +8,14 @@
 import UIKit
 
 class ReminderListDataSource: NSObject {
+    
     private lazy var dateFormatter = RelativeDateTimeFormatter()
 }
-
 
 // MARK:- Data Source Methods
 extension ReminderListDataSource: UITableViewDataSource {
     
-    //static let showDetailSegueIndentifier = "ShowReminderDetailSegue"
+    // MARK:- Static Properties
     static let reminderListCellIdentifier = "ReminderListCell"
     
     // Returns the number of rows to display (in table view section).
@@ -24,26 +24,8 @@ extension ReminderListDataSource: UITableViewDataSource {
     }
     // Returns a cell for an index path.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: ReminderListViewController.reminderListCellIdentifier, for: indexPath) as? ReminderListCell else {
-//            fatalError("Unable to dequeue ReminderCell")
-//        }
-//
-//        let reminder = Reminder.testData[indexPath.row]
-//        let dateText = dateFormatter.localizedString(for: reminder.dueDate, relativeTo: Date())
-//        let image = reminder.isComplete ? UIImage(systemName: "circle.fill") : UIImage(systemName: "circle")
-//
-//        cell.titleLabel.text = reminder.title
-//        cell.dateLabel.text = reminder.dueDate.description
-//        cell.doneButton.setBackgroundImage(image, for: .normal)
-//
-//        cell.doneButtonAction = {
-//            Reminder.testData[indexPath.row].isComplete.toggle()
-//            tableView.reloadRows(at: [indexPath], with: .none)
-//        }
-//        return cell
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Self.reminderListCellIdentifier, for: indexPath) as? ReminderListCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Self.reminderListCellIdentifier, for: indexPath)
+                as? ReminderListCell else {
             fatalError("Unable to dequeue ReminderCell")
         }
         

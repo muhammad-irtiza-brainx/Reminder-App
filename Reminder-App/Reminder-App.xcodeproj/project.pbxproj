@@ -19,6 +19,10 @@
 		D95D371626A049FA003B4CFE /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95D371526A049FA003B4CFE /* Images.swift */; };
 		D95D371D26A080E4003B4CFE /* ReminderListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95D371C26A080E4003B4CFE /* ReminderListDataSource.swift */; };
 		D95D372026A172ED003B4CFE /* ReminderDetailViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95D371F26A172ED003B4CFE /* ReminderDetailViewDataSource.swift */; };
+		D95D372926A19188003B4CFE /* EditTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95D372826A19188003B4CFE /* EditTitleCell.swift */; };
+		D95D372C26A19221003B4CFE /* EditDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95D372B26A19221003B4CFE /* EditDateCell.swift */; };
+		D95D372F26A192D0003B4CFE /* EditNotesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95D372E26A192D0003B4CFE /* EditNotesCell.swift */; };
+		D95D373226A19B65003B4CFE /* ReminderDetailEditDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95D373126A19B65003B4CFE /* ReminderDetailEditDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +40,10 @@
 		D95D371526A049FA003B4CFE /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		D95D371C26A080E4003B4CFE /* ReminderListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListDataSource.swift; sourceTree = "<group>"; };
 		D95D371F26A172ED003B4CFE /* ReminderDetailViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDetailViewDataSource.swift; sourceTree = "<group>"; };
+		D95D372826A19188003B4CFE /* EditTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTitleCell.swift; sourceTree = "<group>"; };
+		D95D372B26A19221003B4CFE /* EditDateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDateCell.swift; sourceTree = "<group>"; };
+		D95D372E26A192D0003B4CFE /* EditNotesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNotesCell.swift; sourceTree = "<group>"; };
+		D95D373126A19B65003B4CFE /* ReminderDetailEditDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDetailEditDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +76,7 @@
 		D95D36F4269EC4FC003B4CFE /* Reminder-App */ = {
 			isa = PBXGroup;
 			children = (
+				D95D372226A19041003B4CFE /* Views */,
 				D95D371426A049E5003B4CFE /* Globals */,
 				D95D36F5269EC4FC003B4CFE /* AppDelegate.swift */,
 				D95D36F7269EC4FC003B4CFE /* SceneDelegate.swift */,
@@ -77,10 +86,10 @@
 				D95D3700269EC505003B4CFE /* LaunchScreen.storyboard */,
 				D95D3703269EC505003B4CFE /* Info.plist */,
 				D95D370A269ECC69003B4CFE /* Reminder.swift */,
-				D95D370D269F0662003B4CFE /* ReminderListCell.swift */,
 				D95D371126A010B4003B4CFE /* ReminderDetailViewController.swift */,
 				D95D371C26A080E4003B4CFE /* ReminderListDataSource.swift */,
 				D95D371F26A172ED003B4CFE /* ReminderDetailViewDataSource.swift */,
+				D95D373126A19B65003B4CFE /* ReminderDetailEditDataSource.swift */,
 			);
 			path = "Reminder-App";
 			sourceTree = "<group>";
@@ -91,6 +100,17 @@
 				D95D371526A049FA003B4CFE /* Images.swift */,
 			);
 			path = Globals;
+			sourceTree = "<group>";
+		};
+		D95D372226A19041003B4CFE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D95D370D269F0662003B4CFE /* ReminderListCell.swift */,
+				D95D372826A19188003B4CFE /* EditTitleCell.swift */,
+				D95D372B26A19221003B4CFE /* EditDateCell.swift */,
+				D95D372E26A192D0003B4CFE /* EditNotesCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,11 +183,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D95D372926A19188003B4CFE /* EditTitleCell.swift in Sources */,
+				D95D372F26A192D0003B4CFE /* EditNotesCell.swift in Sources */,
 				D95D371626A049FA003B4CFE /* Images.swift in Sources */,
 				D95D36FA269EC4FC003B4CFE /* ReminderListViewController.swift in Sources */,
+				D95D372C26A19221003B4CFE /* EditDateCell.swift in Sources */,
 				D95D370E269F0662003B4CFE /* ReminderListCell.swift in Sources */,
 				D95D36F6269EC4FC003B4CFE /* AppDelegate.swift in Sources */,
 				D95D372026A172ED003B4CFE /* ReminderDetailViewDataSource.swift in Sources */,
+				D95D373226A19B65003B4CFE /* ReminderDetailEditDataSource.swift in Sources */,
 				D95D371D26A080E4003B4CFE /* ReminderListDataSource.swift in Sources */,
 				D95D371226A010B4003B4CFE /* ReminderDetailViewController.swift in Sources */,
 				D95D36F8269EC4FC003B4CFE /* SceneDelegate.swift in Sources */,

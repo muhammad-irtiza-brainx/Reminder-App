@@ -8,6 +8,8 @@
 import Foundation
 
 struct Reminder {
+    
+    // MARK:- Instance Properties
     var title: String
     var dueDate: Date
     var notes: String? = nil
@@ -15,6 +17,8 @@ struct Reminder {
 }
 
 extension Reminder {
+    
+    // MARK:- Static Properties
     static var testData: [Reminder] = [
         Reminder(title: "Create remote repo", dueDate: Date().addingTimeInterval(800.0), notes: "Use your own github account"),
         
