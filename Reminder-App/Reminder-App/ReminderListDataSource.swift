@@ -9,20 +9,19 @@ import UIKit
 
 class ReminderListDataSource: NSObject {
     
+    // MARK:- Static Properties
+    static let reminderListCellIdentifier = "ReminderListCell"
+    
+    // MARK:- Private Properties
     private lazy var dateFormatter = RelativeDateTimeFormatter()
 }
 
 // MARK:- Data Source Methods
 extension ReminderListDataSource: UITableViewDataSource {
     
-    // MARK:- Static Properties
-    static let reminderListCellIdentifier = "ReminderListCell"
-    
-    // Returns the number of rows to display (in table view section).
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Reminder.testData.count
     }
-    // Returns a cell for an index path.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Self.reminderListCellIdentifier, for: indexPath)
                 as? ReminderListCell else {
