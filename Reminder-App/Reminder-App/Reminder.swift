@@ -24,7 +24,7 @@ extension Reminder {
         
         Reminder(title: "Commit and push", dueDate: Date().addingTimeInterval(3200.0), notes: "Good commit message"),
         
-        Reminder(title: "Create branch for feature", dueDate: Date().addingTimeInterval(60000.0), notes: "Call this branch feature/feature-name", isComplete: ture),
+        Reminder(title: "Create branch for feature", dueDate: Date().addingTimeInterval(60000.0), notes: "Call this branch feature/feature-name", isComplete: true),
         
         Reminder(title: "Implement the feature", dueDate: Date().addingTimeInterval(72000.0), notes: "Write clean code"),
         
