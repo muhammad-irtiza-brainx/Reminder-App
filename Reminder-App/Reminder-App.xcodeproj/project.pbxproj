@@ -23,6 +23,7 @@
 		D95D372C26A19221003B4CFE /* EditDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95D372B26A19221003B4CFE /* EditDateCell.swift */; };
 		D95D372F26A192D0003B4CFE /* EditNotesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95D372E26A192D0003B4CFE /* EditNotesCell.swift */; };
 		D95D373226A19B65003B4CFE /* ReminderDetailEditDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95D373126A19B65003B4CFE /* ReminderDetailEditDataSource.swift */; };
+		D9ABF9F726A1D6180075549C /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ABF9F626A1D6180075549C /* UITableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		D95D372B26A19221003B4CFE /* EditDateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDateCell.swift; sourceTree = "<group>"; };
 		D95D372E26A192D0003B4CFE /* EditNotesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNotesCell.swift; sourceTree = "<group>"; };
 		D95D373126A19B65003B4CFE /* ReminderDetailEditDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDetailEditDataSource.swift; sourceTree = "<group>"; };
+		D9ABF9F626A1D6180075549C /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 		D95D36F4269EC4FC003B4CFE /* Reminder-App */ = {
 			isa = PBXGroup;
 			children = (
+				D9ABF9F526A1D6010075549C /* Extensions */,
 				D95D372226A19041003B4CFE /* Views */,
 				D95D371426A049E5003B4CFE /* Globals */,
 				D95D36F5269EC4FC003B4CFE /* AppDelegate.swift */,
@@ -111,6 +114,14 @@
 				D95D372E26A192D0003B4CFE /* EditNotesCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		D9ABF9F526A1D6010075549C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D9ABF9F626A1D6180075549C /* UITableViewCell.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,6 +207,7 @@
 				D95D371226A010B4003B4CFE /* ReminderDetailViewController.swift in Sources */,
 				D95D36F8269EC4FC003B4CFE /* SceneDelegate.swift in Sources */,
 				D95D370B269ECC69003B4CFE /* Reminder.swift in Sources */,
+				D9ABF9F726A1D6180075549C /* UITableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

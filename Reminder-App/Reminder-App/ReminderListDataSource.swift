@@ -23,7 +23,7 @@ extension ReminderListDataSource: UITableViewDataSource {
         return Reminder.testData.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Self.reminderListCellIdentifier, for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ReminderListCell.reusableIdentifier, for: indexPath)
                 as? ReminderListCell else {
             fatalError("Unable to dequeue ReminderCell")
         }

@@ -18,19 +18,15 @@ class ReminderDetailViewDataSource: NSObject {
         // MARK:- Static Properties
         static let timeFormatter: DateFormatter = {
             let formatter = DateFormatter()
-            
             formatter.dateStyle = .none
             formatter.timeStyle = .short
-            
             return formatter
         }()
         
         static let dateFormatter: DateFormatter = {
             let formatter = DateFormatter()
-            
             formatter.timeStyle = .none
             formatter.dateStyle = .long
-            
             return formatter
         }()
         

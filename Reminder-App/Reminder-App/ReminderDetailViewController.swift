@@ -37,7 +37,6 @@ class ReminderDetailViewController: UITableViewController {
         if editing {
             dataSource = ReminderDetailEditDataSource(reminder: reminder)
         } else {
-            
             dataSource = ReminderDetailViewDataSource(reminder: reminder)
         }
         
