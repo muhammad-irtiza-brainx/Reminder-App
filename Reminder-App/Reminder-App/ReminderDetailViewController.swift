@@ -9,17 +9,19 @@ import UIKit
 
 class ReminderDetailViewController: UITableViewController {
     
-    // MARK: Private Propeeties
+    // MARK: Private Properties
     private var reminder: Reminder?
     private var dataSource: UITableViewDataSource?
     
-    // MARK: Instance Methods
+    // MARK: Public Methods
     func configure(with reminder: Reminder) {
+        
         self.reminder = reminder
     }
     
-    // MARK:- Lifecycle Methods
+    // MARK: Lifecycle Methods
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         setEditing(false, animated: false)
         navigationItem.setRightBarButton(editButtonItem, animated: false)
@@ -28,16 +30,16 @@ class ReminderDetailViewController: UITableViewController {
     
     // MARK: Overridden Methods
     override func setEditing(_ editing: Bool, animated: Bool) {
+        
         super.setEditing(editing, animated: animated)
         
         guard let reminder = reminder else {
-            fatalError("No reminder found for detail view")
+            return
         }
         
         if editing {
             dataSource = ReminderDetailEditDataSource(reminder: reminder)
         } else {
-            
             dataSource = ReminderDetailViewDataSource(reminder: reminder)
         }
         
