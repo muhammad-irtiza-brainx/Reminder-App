@@ -12,26 +12,30 @@ class ReminderListViewController: UITableViewController {
     // MARK: Private Properties
     private var reminderListDataSource: ReminderListDataSource?
     
-    // MARK: Static Properties
+    // MARK: Public Properties
     static let showDetailSegueIdentifier = "ShowReminderDetailSegue"
     static let reminderListCellIdentifier = "ReminderListCell"
+    static let mainStoryboardName = "Main"
+    static let detailViewControllerIdentifier = "ReminderDetailViewController"
     
     // MARK: Overridden Methods
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Self.showDetailSegueIdentifier,
            let destination = segue.destination as? ReminderDetailViewController,
            let cell = sender as? UITableViewCell,
+           
            let indexPath = tableView.indexPath(for: cell) {
             let rowIndex = indexPath.row
+            
             guard let reminder = reminderListDataSource?.reminder(at: rowIndex) else {
                 return
             }
             
-            destination.configure(with: reminder) {
+            destination.configure(with: reminder, editAction: {
                 reminder in
                 self.reminderListDataSource?.update(reminder, at: rowIndex)
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
-            }
+            })
         }
     }
     
@@ -41,5 +45,35 @@ class ReminderListViewController: UITableViewController {
         
         reminderListDataSource = ReminderListDataSource()
         tableView.dataSource = reminderListDataSource
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if let navigationController = navigationController,
+           navigationController.isToolbarHidden {
+            navigationController.setToolbarHidden(false, animated: animated)
+        }
+    }
+    
+    // MARK: Private Methods
+    private func addReminder() {
+        let storyboard = UIStoryboard(name: Self.mainStoryboardName, bundle: nil)
+        let detailViewController: ReminderDetailViewController = storyboard.instantiateViewController(identifier: Self.detailViewControllerIdentifier)
+        let reminder = Reminder(title: "New Reminder", dueDate: Date())
+        
+        detailViewController.configure(with: reminder, isNew: true, addAction: {
+            reminder in
+            self.reminderListDataSource?.add(reminder)
+            self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+        })
+        
+        let navigationController = UINavigationController(rootViewController: detailViewController)
+        present(navigationController, animated: true, completion: nil)
+    }
+    
+    // MARK: Actions
+    @IBAction func addButtonTriggered(_ sender: UIBarButtonItem) {
+        addReminder()
     }
 }

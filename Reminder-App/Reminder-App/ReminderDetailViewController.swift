@@ -15,25 +15,46 @@ class ReminderDetailViewController: UITableViewController {
     private var reminder: Reminder?
     private var temporaryReminder: Reminder?
     private var dataSource: UITableViewDataSource?
-    private var reminderChangeAction: ReminderChangeAction?
+    private var reminderEditAction: ReminderChangeAction?
+    private var reminderAddAction: ReminderChangeAction?
+    private var isNew = false
     
     // MARK: Public Methods
-    func configure(with reminder: Reminder, changeAction: @escaping ReminderChangeAction) {
+    func configure(with reminder: Reminder, isNew: Bool = false, addAction: ReminderChangeAction? = nil, editAction: ReminderChangeAction? = nil) {
         self.reminder = reminder
-        self.reminderChangeAction = changeAction
+        self.isNew = isNew
+        self.reminderAddAction = addAction
+        self.reminderEditAction = editAction
+        
+        if isViewLoaded {
+            setEditing(isNew, animated: false)
+        }
     }
     
     @objc
     func cancelButtonTrigger() {
-        setEditing(false, animated: true)
+        if isNew {
+            dismiss(animated: true, completion: nil)
+        } else {
+            temporaryReminder = nil
+            setEditing(false, animated: true)
+        }
     }
     
     // MARK: Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        setEditing(false, animated: false)
+        setEditing(isNew, animated: false)
         navigationItem.setRightBarButton(editButtonItem, animated: false)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: ReminderDetailEditDataSource.dateLabelCellIdentifier)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let navigationController = navigationController,
+           !navigationController.isToolbarHidden {
+            navigationController.setToolbarHidden(true, animated: animated)
+        }
     }
     
     // MARK: Overridden Methods
@@ -45,50 +66,50 @@ class ReminderDetailViewController: UITableViewController {
         }
         
         if editing {
-            dataSource = ReminderDetailEditDataSource(reminder: reminder) {
-                reminder in
-                self.temporaryReminder = reminder
-                self.editButtonItem.isEnabled = true
-            }
-            
-            navigationItem.title = NSLocalizedString("Edit Reminder", comment: "edit reminder nav title")
-            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonTrigger))
+            trainsitionToEditMode(reminder)
         } else {
-            if let temporaryReminder = temporaryReminder {
-                self.reminder = temporaryReminder
-                self.temporaryReminder = nil
-                
-                reminderChangeAction?(temporaryReminder)
-                dataSource = ReminderDetailViewDataSource(reminder: temporaryReminder)
-            } else {
-                dataSource = ReminderDetailViewDataSource(reminder: reminder)
-            }
-            
-            navigationItem.title = NSLocalizedString("View Reminder", comment: "view reminder nav title")
-            navigationItem.leftBarButtonItem = nil
-            editButtonItem.isEnabled = true
-//
-//            guard let temporaryReminder = temporaryReminder else {
-//                dataSource = ReminderDetailViewDataSource(reminder: reminder)
-//
-//                navigationItem.title = NSLocalizedString("View Reminder", comment: "view reminder nav title")
-//                navigationItem.leftBarButtonItem = nil
-//                editButtonItem.isEnabled = true
-//
-//                return
-//            }
-//
-//            navigationItem.title = NSLocalizedString("View Reminder", comment: "view reminder nav title")
-//            navigationItem.leftBarButtonItem = nil
-//            editButtonItem.isEnabled = true
-//
-//            self.reminder = temporaryReminder
-//            self.temporaryReminder = nil
-//            reminderChangeAction?(temporaryReminder)
-//            dataSource = ReminderDetailViewDataSource(reminder: temporaryReminder)
+            transitionToView(reminder)
         }
         
         tableView.dataSource = dataSource
         tableView.reloadData()
+    }
+    
+    // MARK: File Private Methods
+    fileprivate func transitionToView(_ reminder: Reminder) {
+        if let temporaryReminder = temporaryReminder {
+            self.reminder = temporaryReminder
+            self.temporaryReminder = nil
+            
+            reminderEditAction?(temporaryReminder)
+            dataSource = ReminderDetailViewDataSource(reminder: temporaryReminder)
+        } else {
+            dataSource = ReminderDetailViewDataSource(reminder: reminder)
+        }
+        
+        navigationItem.title = NSLocalizedString("View Reminder", comment: "view reminder nav title")
+        navigationItem.leftBarButtonItem = nil
+        editButtonItem.isEnabled = true
+    }
+    
+    fileprivate func trainsitionToEditMode(_ reminder: Reminder) {
+        if isNew {
+            let addReminder = temporaryReminder ?? reminder
+            
+            dismiss(animated: true) {
+                self.reminderAddAction?(addReminder)
+            }
+            return
+        }
+        
+        dataSource = ReminderDetailEditDataSource(reminder: reminder) {
+            reminder in
+            self.temporaryReminder = reminder
+            self.editButtonItem.isEnabled = true
+        }
+        
+        navigationItem.title = isNew ? NSLocalizedString("Add Reminder", comment: "add reminder nav title") :
+            NSLocalizedString("Edit Reminder", comment: "edit reminder nav title")
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonTrigger))
     }
 }

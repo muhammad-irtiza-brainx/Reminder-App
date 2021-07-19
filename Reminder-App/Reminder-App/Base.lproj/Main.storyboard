@@ -69,16 +69,24 @@
                             <outlet property="delegate" destination="XQR-DW-PAn" id="FQx-tV-W6p"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem systemItem="add" id="lAX-5O-aZQ">
+                            <connections>
+                                <action selector="addButtonTriggered:" destination="XQR-DW-PAn" id="LoB-g6-z71"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="tVs-ku-iYu"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m9G-Rj-fDg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="642.02898550724638" y="36.830357142857139"/>
+            <point key="canvasLocation" x="535" y="37"/>
         </scene>
         <!--ViewReminder-->
         <scene sceneID="16x-0w-EdE">
             <objects>
-                <tableViewController id="4fE-6T-g5c" customClass="ReminderDetailViewController" customModule="Reminder_App" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ReminderDetailViewController" id="4fE-6T-g5c" customClass="ReminderDetailViewController" customModule="Reminder_App" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="YGE-tI-pST">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -185,18 +193,22 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WIc-3c-tJd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1394" y="47"/>
+            <point key="canvasLocation" x="1286" y="37"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="HHK-Pn-DoC">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3wx-6o-FUs" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="3wx-6o-FUs" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="CQb-tk-6KZ">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XKk-kl-EGa">
+                        <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="XQR-DW-PAn" kind="relationship" relationship="rootViewController" id="UZc-Sm-xAv"/>
                     </connections>
