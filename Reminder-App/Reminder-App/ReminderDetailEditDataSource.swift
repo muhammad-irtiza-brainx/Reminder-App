@@ -11,54 +11,54 @@ class ReminderDetailEditDataSource: NSObject {
     
     enum ReminderSection: Int, CaseIterable {
         
-        // MARK:- Cases
         case title
         case dueDate
-        case notes
+        case note
         
-        // MARK:- Public Methods
+        // MARK: Public Methods
         func cellIdentifier(for row: Int) -> String {
+            
             switch self {
             case .title:
                 return "EditTitleCell"
             case .dueDate:
                 return row == 0 ? "EditDateLabelCell" : "EditDateCell"
-            case .notes:
-                return "EditNotesCell"
+            case .note:
+                return "EditnoteCell"
+            }
+        }
+    
+        // MARK: Computed Properties
+        var displayText: String {
+            switch self {
+            case .title:
+                return "Title"
+            case .dueDate:
+                return "Date"
+            case .note:
+                return "note"
+            }
+        }
+    
+        var numRows: Int {
+            switch self {
+            case .title, .note:
+                return 1
+            case .dueDate:
+                return 2
             }
         }
     }
     
-    // MARK:- Computed Properties
-    var displayText: String {
-        switch self {
-        case .title:
-            return "Title"
-        case .dueDate:
-            return "Date"
-        case .notes:
-            return "Notes"
-        }
-    }
-    
-    var numRows: Int {
-        switch self {
-        case .title, .notes:
-            return 1
-        case .dueDate:
-            return 2
-        }
-    }
-    
+    // MARK: Static Properties
     static var dateLabelCellIdentifier: String {
         return ReminderSection.dueDate.cellIdentifier(for: 0)
     }
     
-    // MARK:- Private Properties
-    
-    
-    // MARK:- Stored Properties
+    // MARK: Stored Properties
     var reminder: Reminder
+
+    // MARK: Private Properties
     private lazy var formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .full
@@ -66,15 +66,16 @@ class ReminderDetailEditDataSource: NSObject {
         return formatter
     }()
     
-    // MARK:- Initializers
+    // MARK: Initializers
     init(reminder: Reminder) {
         self.reminder = reminder
     }
     
-    // MARK:- Private Methods
+    // MARK: Private Methods
     private func dequeueAndConfigureCell(for indexPath: IndexPath, from tableView: UITableView) -> UITableViewCell {
+        
         guard let section = ReminderSection(rawValue: indexPath.section) else {
-            fatalError("Section index out of range")
+            return UITableViewCell()
         }
         
         let identifier = section.cellIdentifier(for: indexPath.row)
@@ -88,14 +89,12 @@ class ReminderDetailEditDataSource: NSObject {
         case .dueDate:
             if indexPath.row == 0 {
                 cell.textLabel?.text = formatter.string(from: reminder.dueDate)
-            } else {
-                if let dueDateCell = cell as? EditDateCell {
+            } else if let dueDateCell = cell as? EditDateCell {
                     dueDateCell.configure(date: reminder.dueDate)
-                }
             }
-        case .notes:
-            if let notesCell = cell as? EditNotesCell {
-                notesCell.configure(notes: reminder.notes)
+        case .note:
+            if let noteCell = cell as? EditnoteCell {
+                noteCell.configure(note: reminder.note)
             }
         }
         
@@ -103,30 +102,35 @@ class ReminderDetailEditDataSource: NSObject {
     }
 }
 
-// MARK:- Data Source Methods
+// MARK: Data Source Methods
 extension ReminderDetailEditDataSource: UITableViewDataSource {
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
+
         ReminderSection.allCases.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
         ReminderSection(rawValue: section)?.numRows ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
         dequeueAndConfigureCell(for: indexPath, from: tableView)
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
         guard let section = ReminderSection(rawValue: section) else {
-            fatalError("Section index out of range")
+            return nil
         }
         
         return section.displayText
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-            return false
+
+            false
         }
 }

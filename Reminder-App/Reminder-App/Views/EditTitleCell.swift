@@ -12,8 +12,9 @@ class EditTitleCell: UITableViewCell {
     // MARK: Outlets
     @IBOutlet var titleTextField: UITextField!
     
-    // MARK: Instance Methods
+    // MARK: Public Methods
     func configure(title: String) {
+        
         titleTextField.text = title
     }
 }

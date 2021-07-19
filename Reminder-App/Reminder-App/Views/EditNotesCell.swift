@@ -1,5 +1,5 @@
 //
-//  EditNotesCell.swift
+//  EditnoteCell.swift
 //  Reminder-App
 //
 //  Created by BrainX Technologies 11 on 16/07/2021.
@@ -7,13 +7,14 @@
 
 import UIKit
 
-class EditNotesCell: UITableViewCell {
+class EditnoteCell: UITableViewCell {
     
     // MARK: Outlets
-    @IBOutlet var notesTextView: UITextView!
+    @IBOutlet var noteTextView: UITextView!
     
-    // MARK: Instance Methods
-    func configure(notes: String?) {
-        notesTextView.text = notes
+    // MARK: Public Methods
+    func configure(note: String?) {
+        
+        noteTextView.text = note
     }
 }

@@ -10,12 +10,14 @@ import UIKit
 class ReminderDetailViewDataSource: NSObject {
     
     enum ReminderRow: Int, CaseIterable {
+        
+        // MARK: Cases
         case title
         case date
         case time
-        case notes
+        case note
         
-        // MARK:- Static Properties
+        // MARK: Static Properties
         static let timeFormatter: DateFormatter = {
             let formatter = DateFormatter()
             formatter.dateStyle = .none
@@ -30,8 +32,9 @@ class ReminderDetailViewDataSource: NSObject {
             return formatter
         }()
         
-        // MARK:- Instance Methods
+        // MARK: Public Methods
         func displayText(for reminder: Reminder?) -> String? {
+            
             switch self {
             case .title:
                 return reminder?.title
@@ -41,8 +44,8 @@ class ReminderDetailViewDataSource: NSObject {
             case .time:
                 guard let date = reminder?.dueDate else { return nil }
                 return Self.timeFormatter.string(from: date)
-            case .notes:
-                return reminder?.notes
+            case .note:
+                return reminder?.note
             }
         }
         
@@ -55,34 +58,35 @@ class ReminderDetailViewDataSource: NSObject {
                 return UIImage(systemName: Images.calenderCirceImage)
             case .time:
                 return UIImage(systemName: Images.clockImage)
-            case .notes:
+            case .note:
                 return UIImage(systemName: Images.squareAndPencil)
             }
         }
     }
     
-    // MARK:- Private Properties
+    // MARK: Private Properties
     private var reminder: Reminder
     
-    // MARK:- Initializers
+    // MARK: Initializers
     init(reminder: Reminder) {
         self.reminder = reminder
         super.init()
     }
 }
 
-// MARK:- Data Source Methods
+// MARK: Data Source Methods
 extension ReminderDetailViewDataSource: UITableViewDataSource {
     
-    // MARK:- Static Properties
+    // MARK: Static Properties
     static let reminderDetailCellIdentifier = "ReminderDetailCell"
-    
-    // MARK:- Lifecycle Methods
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return ReminderRow.allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: Self.reminderDetailCellIdentifier, for: indexPath)
         let row = ReminderRow(rawValue: indexPath.row)
         

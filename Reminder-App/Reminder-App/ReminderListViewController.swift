@@ -9,15 +9,16 @@ import UIKit
 
 class ReminderListViewController: UITableViewController {
     
-    // MARK:- Private Properties
+    // MARK: Private Properties
     private var reminderListDataSource: ReminderListDataSource?
     
-    // MARK:- Identifiers
+    // MARK: Static Properties
     static let showDetailSegueIdentifier = "ShowReminderDetailSegue"
     static let reminderListCellIdentifier = "ReminderListCell"
     
-    // MARK:- Overridden Methods
+    // MARK: Overridden Methods
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == Self.showDetailSegueIdentifier,
            let destination = segue.destination as? ReminderDetailViewController,
            let cell = sender as? UITableViewCell,
@@ -28,8 +29,9 @@ class ReminderListViewController: UITableViewController {
         }
     }
     
-    // MARK:- Lifecycle Methods
+    // MARK: Lifecycle Methods
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         reminderListDataSource = ReminderListDataSource()

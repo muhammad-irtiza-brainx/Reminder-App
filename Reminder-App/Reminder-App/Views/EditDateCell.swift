@@ -12,8 +12,9 @@ class EditDateCell: UITableViewCell {
     // MARK: Outlets
     @IBOutlet var datePicker: UIDatePicker!
     
-    // MARK: Instance Methods
+    // MARK: Public Methods
     func configure(date: Date) {
+        
         datePicker.date = date
     }
 }

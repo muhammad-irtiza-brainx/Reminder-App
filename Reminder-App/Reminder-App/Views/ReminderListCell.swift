@@ -11,22 +11,24 @@ class ReminderListCell: UITableViewCell {
     
     typealias DoneButtonAction = () -> Void
     
-    //MARK:- Outlets
+    // MARK: Outlets
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var doneButton: UIButton!
     
-    //MARK:- Public Property
+    // MARK: Public Property
     var doneButtonAction: DoneButtonAction?
     
-    //MARK:- Actions
+    // MARK: Actions
     @IBAction
     func doneButtonTriggered(_ sender: UIButton) {
+        
         doneButtonAction?()
     }
     
-    //MARK:- Instance Methods
+    // MARK: Public Methods
     func configure(title: String, dateText: String, isDone: Bool, doneButtonAction: @escaping DoneButtonAction) {
+        
         titleLabel.text = title
         dateLabel.text = dateText
         
@@ -34,6 +36,5 @@ class ReminderListCell: UITableViewCell {
         doneButton.setBackgroundImage(image, for: .normal)
         
         self.doneButtonAction = doneButtonAction
-        
     }
 }

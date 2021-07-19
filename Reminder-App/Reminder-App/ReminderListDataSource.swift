@@ -9,23 +9,25 @@ import UIKit
 
 class ReminderListDataSource: NSObject {
     
-    // MARK:- Static Properties
+    // MARK: Static Properties
     static let reminderListCellIdentifier = "ReminderListCell"
     
-    // MARK:- Private Properties
+    // MARK: Private Properties
     private lazy var dateFormatter = RelativeDateTimeFormatter()
 }
 
-// MARK:- Data Source Methods
+// MARK: Data Source Methods
 extension ReminderListDataSource: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return Reminder.testData.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ReminderListCell.reusableIdentifier, for: indexPath)
                 as? ReminderListCell else {
-            fatalError("Unable to dequeue ReminderCell")
+            return UITableViewCell()
         }
         
         let reminder = Reminder.testData[indexPath.row]
@@ -35,6 +37,7 @@ extension ReminderListDataSource: UITableViewDataSource {
             Reminder.testData[indexPath.row].isComplete.toggle()
             tableView.reloadRows(at: [indexPath], with: .none)
         }
+        
         return cell
     }
 }
