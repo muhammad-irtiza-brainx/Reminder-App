@@ -11,7 +11,6 @@ class ReminderDetailViewDataSource: NSObject {
     
     enum ReminderRow: Int, CaseIterable {
         
-        // MARK: Cases
         case title
         case date
         case time
@@ -40,6 +39,11 @@ class ReminderDetailViewDataSource: NSObject {
                 return reminder?.title
             case .date:
                 guard let date = reminder?.dueDate else { return nil }
+                
+                if Locale.current.calendar.isDateInToday(date) {
+                    return NSLocalizedString("Today", comment: "Today for date description")
+                }
+                
                 return Self.dateFormatter.string(from: date)
             case .time:
                 guard let date = reminder?.dueDate else { return nil }
@@ -49,7 +53,7 @@ class ReminderDetailViewDataSource: NSObject {
             }
         }
         
-        // MARK:- Computed Properties
+        // MARK: Computed Properties
         var cellImage: UIImage? {
             switch self {
             case .title:
@@ -79,7 +83,7 @@ extension ReminderDetailViewDataSource: UITableViewDataSource {
     
     // MARK: Static Properties
     static let reminderDetailCellIdentifier = "ReminderDetailCell"
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return ReminderRow.allCases.count
