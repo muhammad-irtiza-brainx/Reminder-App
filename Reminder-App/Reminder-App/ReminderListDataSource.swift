@@ -14,13 +14,21 @@ class ReminderListDataSource: NSObject {
     
     // MARK: Private Properties
     private lazy var dateFormatter = RelativeDateTimeFormatter()
+    
+    // MARK: Public Methods
+    func update(_ reminder: Reminder, at row: Int) {
+        Reminder.testData[row] = reminder
+    }
+    
+    func reminder(at row: Int) -> Reminder {
+        Reminder.testData[row]
+    }
 }
 
 // MARK: Data Source Methods
 extension ReminderListDataSource: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return Reminder.testData.count
     }
     
@@ -37,7 +45,6 @@ extension ReminderListDataSource: UITableViewDataSource {
             Reminder.testData[indexPath.row].isComplete.toggle()
             tableView.reloadRows(at: [indexPath], with: .none)
         }
-        
         return cell
     }
 }

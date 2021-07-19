@@ -145,7 +145,7 @@
                                     <outlet property="datePicker" destination="kw7-2z-o96" id="4Ur-1W-zFb"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EditnoteCell" rowHeight="216" id="vPQ-jZ-i05" customClass="EditnoteCell" customModule="Reminder_App" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EditNoteCell" rowHeight="216" id="vPQ-jZ-i05" customClass="EditNoteCell" customModule="Reminder_App" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="343.5" width="414" height="216"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vPQ-jZ-i05" id="FGl-rP-31r">
