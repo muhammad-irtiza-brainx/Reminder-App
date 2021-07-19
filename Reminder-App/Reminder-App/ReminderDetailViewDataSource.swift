@@ -83,8 +83,7 @@ extension ReminderDetailViewDataSource: UITableViewDataSource {
     
     // MARK: Static Properties
     static let reminderDetailCellIdentifier = "ReminderDetailCell"
-    
-    // MARK: Lifecycle Methods
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return ReminderRow.allCases.count

@@ -28,7 +28,7 @@ extension ReminderListDataSource: UITableViewDataSource {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Self.reminderListCellIdentifier, for: indexPath)
                 as? ReminderListCell else {
-            return
+            return UITableViewCell()
         }
         
         let reminder = Reminder.testData[indexPath.row]

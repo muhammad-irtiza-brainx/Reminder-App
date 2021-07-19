@@ -28,7 +28,7 @@ class ReminderDetailEditDataSource: NSObject {
                 return "EditnoteCell"
             }
         }
-    }
+//    }
     
     // MARK: Computed Properties
     var displayText: String {
@@ -50,7 +50,7 @@ class ReminderDetailEditDataSource: NSObject {
             return 2
         }
     }
-    
+    }
     // MARK: Static Properties
     static var dateLabelCellIdentifier: String {
         return ReminderSection.dueDate.cellIdentifier(for: 0)
@@ -81,12 +81,10 @@ class ReminderDetailEditDataSource: NSObject {
                 titleCell.configure(title: reminder.title)
             }
         case .dueDate:
-            guard indexPath.row != 0 else {
+            if indexPath.row == 0 {
                 cell.textLabel?.text = reminder.dueDate.description
-            }
-            
-            if let dueDateCell = cell as? EditDateCell {
-                dueDateCell.configure(date: reminder.dueDate)
+            } else if let dueDateCell = cell as? EditDateCell {
+                    dueDateCell.configure(date: reminder.dueDate)
             }
         case .note:
             if let noteCell = cell as? EditnoteCell {
@@ -100,14 +98,12 @@ class ReminderDetailEditDataSource: NSObject {
 
 // MARK: Data Source Methods
 extension ReminderDetailEditDataSource: UITableViewDataSource {
-    
-    // MARK: Public Methods
+
     func numberOfSections(in tableView: UITableView) -> Int {
         
         return ReminderSection.allCases.count
     }
     
-    // MARK: Lifecycle Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return ReminderSection(rawValue: section)?.numRows ?? 0
@@ -121,7 +117,7 @@ extension ReminderDetailEditDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         guard let section = ReminderSection(rawValue: section) else {
-            return UITableViewCell()
+            return ""
         }
         
         return section.displayText
