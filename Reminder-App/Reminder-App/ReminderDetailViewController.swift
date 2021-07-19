@@ -50,22 +50,42 @@ class ReminderDetailViewController: UITableViewController {
                 self.temporaryReminder = reminder
                 self.editButtonItem.isEnabled = true
             }
+            
             navigationItem.title = NSLocalizedString("Edit Reminder", comment: "edit reminder nav title")
             navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonTrigger))
         } else {
+            if let temporaryReminder = temporaryReminder {
+                self.reminder = temporaryReminder
+                self.temporaryReminder = nil
+                
+                reminderChangeAction?(temporaryReminder)
+                dataSource = ReminderDetailViewDataSource(reminder: temporaryReminder)
+            } else {
+                dataSource = ReminderDetailViewDataSource(reminder: reminder)
+            }
+            
             navigationItem.title = NSLocalizedString("View Reminder", comment: "view reminder nav title")
             navigationItem.leftBarButtonItem = nil
             editButtonItem.isEnabled = true
-            
-            guard let temporaryReminder = temporaryReminder else {
-                dataSource = ReminderDetailViewDataSource(reminder: reminder)
-                return
-            }
-            
-            self.reminder = temporaryReminder
-            self.temporaryReminder = nil
-            reminderChangeAction?(temporaryReminder)
-            dataSource = ReminderDetailViewDataSource(reminder: temporaryReminder)
+//
+//            guard let temporaryReminder = temporaryReminder else {
+//                dataSource = ReminderDetailViewDataSource(reminder: reminder)
+//
+//                navigationItem.title = NSLocalizedString("View Reminder", comment: "view reminder nav title")
+//                navigationItem.leftBarButtonItem = nil
+//                editButtonItem.isEnabled = true
+//
+//                return
+//            }
+//
+//            navigationItem.title = NSLocalizedString("View Reminder", comment: "view reminder nav title")
+//            navigationItem.leftBarButtonItem = nil
+//            editButtonItem.isEnabled = true
+//
+//            self.reminder = temporaryReminder
+//            self.temporaryReminder = nil
+//            reminderChangeAction?(temporaryReminder)
+//            dataSource = ReminderDetailViewDataSource(reminder: temporaryReminder)
         }
         
         tableView.dataSource = dataSource
