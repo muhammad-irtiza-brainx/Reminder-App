@@ -9,62 +9,41 @@ import UIKit
 
 class ReminderDetailViewController: UITableViewController {
     
-    enum ReminderRow: Int, CaseIterable {
-        case title
-        case date
-        case time
-        case notes
-        
-        func displayText(for reminder: Reminder?) -> String? {
-            switch self {
-            case .title:
-                return reminder?.title
-            case .date:
-                return reminder?.dueDate.description
-            case .time:
-                return reminder?.dueDate.description
-            case .notes:
-                return reminder?.notes
-            }
-        }
-        
-        var cellImage: UIImage? {
-            switch self {
-            case .title:
-                return nil
-            case .date:
-                return UIImage(systemName: Images.calenderCirceImage)
-            case .time:
-                return UIImage(systemName: Images.clockImage)
-            case .notes:
-                return UIImage(systemName: Images.squareAndPencil)
-            }
-        }
-    }
+    // MARK: Private Properties
+    private var reminder: Reminder?
+    private var dataSource: UITableViewDataSource?
     
-    var reminder: Reminder?
-    
+    // MARK: Public Methods
     func configure(with reminder: Reminder) {
+        
         self.reminder = reminder
     }
     
-}
-
-extension ReminderDetailViewController {
-    
-    static let reminderDetailCellIdentifier = "ReminderDetailCell"
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ReminderRow.allCases.count
+    // MARK: Lifecycle Methods
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        setEditing(false, animated: false)
+        navigationItem.setRightBarButton(editButtonItem, animated: false)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: ReminderDetailEditDataSource.dateLabelCellIdentifier)
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Self.reminderDetailCellIdentifier, for: indexPath)
-        let row = ReminderRow(rawValue: indexPath.row)
+    // MARK: Overridden Methods
+    override func setEditing(_ editing: Bool, animated: Bool) {
         
-        cell.textLabel?.text = row?.displayText(for: reminder)
-        cell.imageView?.image = row?.cellImage
+        super.setEditing(editing, animated: animated)
         
-        return cell
+        guard let reminder = reminder else {
+            return
+        }
+        
+        if editing {
+            dataSource = ReminderDetailEditDataSource(reminder: reminder)
+        } else {
+            dataSource = ReminderDetailViewDataSource(reminder: reminder)
+        }
+        
+        tableView.dataSource = dataSource
+        tableView.reloadData()
     }
 }
