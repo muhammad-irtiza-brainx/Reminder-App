@@ -11,22 +11,22 @@ class ReminderListCell: UITableViewCell {
     
     typealias DoneButtonAction = () -> Void
     
-    //MARK: Outlets
+    // MARK: Outlets
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var doneButton: UIButton!
     
-    //MARK: Public Property
+    // MARK: Public Property
     var doneButtonAction: DoneButtonAction?
     
-    //MARK: Actions
+    // MARK: Actions
     @IBAction
     func doneButtonTriggered(_ sender: UIButton) {
         
         doneButtonAction?()
     }
     
-    //MARK: Public Methods
+    // MARK: Public Methods
     func configure(title: String, dateText: String, isDone: Bool, doneButtonAction: @escaping DoneButtonAction) {
         
         titleLabel.text = title

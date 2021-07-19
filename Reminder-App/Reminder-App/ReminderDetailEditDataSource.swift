@@ -11,7 +11,6 @@ class ReminderDetailEditDataSource: NSObject {
     
     enum ReminderSection: Int, CaseIterable {
         
-        // MARK: Cases
         case title
         case dueDate
         case note
@@ -28,7 +27,6 @@ class ReminderDetailEditDataSource: NSObject {
                 return "EditnoteCell"
             }
         }
-//    }
     
     // MARK: Computed Properties
     var displayText: String {
