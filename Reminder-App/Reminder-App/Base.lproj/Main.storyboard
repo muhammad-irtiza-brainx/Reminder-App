@@ -15,9 +15,48 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="WX6-E5-jIY" userLabel="Progress Header View">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G5l-IX-dVR" userLabel="Progress Container View">
+                                    <rect key="frame" x="62" y="62" width="290" height="290"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mI0-O7-GfU" userLabel="Percent Incomplete View">
+                                            <rect key="frame" x="0.0" y="0.0" width="290" height="144"/>
+                                            <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jOU-Tc-Hhb" userLabel="Percent Complete View">
+                                            <rect key="frame" x="0.0" y="144" width="290" height="146"/>
+                                            <color key="backgroundColor" systemColor="systemTealColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="146" id="C4K-cJ-nhS"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="mI0-O7-GfU" firstAttribute="top" secondItem="G5l-IX-dVR" secondAttribute="top" id="4kF-q0-Eh0"/>
+                                        <constraint firstAttribute="width" secondItem="G5l-IX-dVR" secondAttribute="height" multiplier="1:1" id="6z2-Sg-xaa"/>
+                                        <constraint firstAttribute="bottom" secondItem="jOU-Tc-Hhb" secondAttribute="bottom" id="8Ce-s9-NDd"/>
+                                        <constraint firstItem="jOU-Tc-Hhb" firstAttribute="top" secondItem="mI0-O7-GfU" secondAttribute="bottom" id="IEf-Oo-lDs"/>
+                                        <constraint firstAttribute="trailing" secondItem="jOU-Tc-Hhb" secondAttribute="trailing" id="NiW-dl-5ZY"/>
+                                        <constraint firstItem="mI0-O7-GfU" firstAttribute="leading" secondItem="G5l-IX-dVR" secondAttribute="leading" id="XQy-dj-t7s"/>
+                                        <constraint firstAttribute="trailing" secondItem="mI0-O7-GfU" secondAttribute="trailing" id="jbz-aP-VRz"/>
+                                        <constraint firstItem="jOU-Tc-Hhb" firstAttribute="leading" secondItem="G5l-IX-dVR" secondAttribute="leading" id="lwd-Sk-vlZ"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemGreenColor"/>
+                            <constraints>
+                                <constraint firstItem="G5l-IX-dVR" firstAttribute="width" secondItem="WX6-E5-jIY" secondAttribute="width" multiplier="0.7" id="JkG-fB-pVZ"/>
+                                <constraint firstItem="G5l-IX-dVR" firstAttribute="centerY" secondItem="WX6-E5-jIY" secondAttribute="centerY" id="PoK-GB-zht"/>
+                                <constraint firstItem="G5l-IX-dVR" firstAttribute="centerX" secondItem="WX6-E5-jIY" secondAttribute="centerX" id="RyW-z4-zqq"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ReminderListCell" rowHeight="99" id="Dce-oP-gof" customClass="ReminderListCell" customModule="Reminder_App" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="24.5" width="414" height="99"/>
+                                <rect key="frame" x="0.0" y="438.5" width="414" height="99"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Dce-oP-gof" id="2Qp-BG-M1c">
                                     <rect key="frame" x="0.0" y="0.0" width="384.5" height="99"/>
@@ -94,11 +133,15 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="filterSegmentedControl" destination="K2v-sO-q58" id="iN9-jB-S5e"/>
+                        <outlet property="percentCompleteHeightConstraint" destination="C4K-cJ-nhS" id="YuR-pX-3NW"/>
+                        <outlet property="percentCompleteView" destination="jOU-Tc-Hhb" id="i6i-zI-iyw"/>
+                        <outlet property="percentIncompleteView" destination="mI0-O7-GfU" id="vpC-ot-2FS"/>
+                        <outlet property="progressContainerView" destination="G5l-IX-dVR" id="QVQ-N6-wYv"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m9G-Rj-fDg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="535" y="37"/>
+            <point key="canvasLocation" x="534.78260869565224" y="36.830357142857139"/>
         </scene>
         <!--ViewReminder-->
         <scene sceneID="16x-0w-EdE">
@@ -242,6 +285,15 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemTealColor">
+            <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

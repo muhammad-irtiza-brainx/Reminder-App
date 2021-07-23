@@ -11,6 +11,10 @@ class ReminderListViewController: UITableViewController {
     
     // MARK: Outlets
     @IBOutlet var filterSegmentedControl: UISegmentedControl!
+    @IBOutlet var progressContainerView: UIView!
+    @IBOutlet var percentIncompleteView: UIView!
+    @IBOutlet var percentCompleteView: UIView!
+    @IBOutlet var percentCompleteHeightConstraint: NSLayoutConstraint!
     
     // MARK: Actions
     @IBAction func addButtonTriggered(_ sender: UIBarButtonItem) {
@@ -19,7 +23,8 @@ class ReminderListViewController: UITableViewController {
     
     @IBAction func segmentControlChanged(_ sender: UISegmentedControl) {
         reminderListDataSource?.filter = filter
-                tableView.reloadData()
+        tableView.reloadData()
+        self.refreshProgressView()
     }
     
     // MARK: Private Properties
@@ -50,7 +55,8 @@ class ReminderListViewController: UITableViewController {
             destination.configure(with: reminder, editAction: {
                 reminder in
                 self.reminderListDataSource?.update(reminder, at: rowIndex)
-                self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                self.tableView.reloadData()
+                self.refreshProgressView()
             })
         }
     }
@@ -59,8 +65,24 @@ class ReminderListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        reminderListDataSource = ReminderListDataSource()
+        reminderListDataSource = ReminderListDataSource(reminderCompletedAction: {
+            reminderIndex in
+            self.tableView.reloadRows(at: [IndexPath(row: reminderIndex, section: 0)], with: .automatic)
+            self.refreshProgressView()
+        }, reminderDeletedAction: {
+            self.refreshProgressView()
+        })
+        
         tableView.dataSource = reminderListDataSource
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let radius = view.bounds.size.width * 0.5 * 0.7
+        progressContainerView.layer.cornerRadius = radius
+        progressContainerView.layer.masksToBounds = true
+        self.refreshProgressView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -76,15 +98,30 @@ class ReminderListViewController: UITableViewController {
     private func addReminder() {
         let storyboard = UIStoryboard(name: Self.mainStoryboardName, bundle: nil)
         let detailViewController: ReminderDetailViewController = storyboard.instantiateViewController(identifier: Self.detailViewControllerIdentifier)
-        let reminder = Reminder(title: "New Reminder", dueDate: Date())
+        let reminder = Reminder(id: UUID().uuidString, title: "New Reminder", dueDate: Date())
         
         detailViewController.configure(with: reminder, isNew: true, addAction: {
             reminder in
-            self.reminderListDataSource?.add(reminder)
-            self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+            if let index = self.reminderListDataSource?.add(reminder) {
+                self.tableView.insertRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+                self.refreshProgressView()
+            }
         })
         
         let navigationController = UINavigationController(rootViewController: detailViewController)
         present(navigationController, animated: true, completion: nil)
+    }
+    
+    private func refreshProgressView() {
+        guard let percentComplete = reminderListDataSource?.percentComplete else {
+            return
+        }
+        
+        let totalHeight = progressContainerView.bounds.size.height
+        percentCompleteHeightConstraint.constant = totalHeight * CGFloat(percentComplete)
+        
+        UIView.animate(withDuration: 0.2) {
+            self.progressContainerView.layoutSubviews()
+        }
     }
 }

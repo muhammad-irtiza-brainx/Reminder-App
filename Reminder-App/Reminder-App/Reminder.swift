@@ -10,29 +10,36 @@ import Foundation
 struct Reminder {
     
     // MARK: Instance Properties
+    var id: String
     var title: String
     var dueDate: Date
     var note: String? = nil
     var isComplete: Bool = false
     
     // MARK: Static Properties
-    static var testData: [Reminder] = [
-        Reminder(title: "Create remote repo", dueDate: Date().addingTimeInterval(800.0), note: "Use your own github account"),
+    static var testData = [
+            Reminder(id: UUID().uuidString, title: "Submit reimbursement report", dueDate: Date().addingTimeInterval(800.0), note: "Don't forget about taxi receipts"),
         
-        Reminder(title: "Clone it to local machine", dueDate: Date().addingTimeInterval(14000.0), note: "Use git clone command"),
+            Reminder(id: UUID().uuidString, title: "Code review", dueDate: Date().addingTimeInterval(14000.0), note: "Check tech specs in shared folder", isComplete: true),
         
-        Reminder(title: "Create Xocde project", dueDate: Date().addingTimeInterval(24000.0), note: "This project should be in master branch"),
+            Reminder(id: UUID().uuidString, title: "Pick up new contacts", dueDate: Date().addingTimeInterval(24000.0), note: "Optometrist closes at 6:00PM"),
         
-        Reminder(title: "Commit and push", dueDate: Date().addingTimeInterval(3200.0), note: "Good commit message"),
+            Reminder(id: UUID().uuidString, title: "Add notes to retrospective", dueDate: Date().addingTimeInterval(3200.0),
+                     note: "Collaborate with project manager", isComplete: true),
         
-        Reminder(title: "Create branch for feature", dueDate: Date().addingTimeInterval(60000.0), note: "Call this branch feature/feature-name", isComplete: true),
+            Reminder(id: UUID().uuidString, title: "Interview new project manager candidate", dueDate: Date().addingTimeInterval(60000.0),
+                     note: "Review portfolio"),
         
-        Reminder(title: "Implement the feature", dueDate: Date().addingTimeInterval(72000.0), note: "Write clean code"),
+            Reminder(id: UUID().uuidString, title: "Mock up onboarding experience", dueDate: Date().addingTimeInterval(72000.0),
+                     note: "Think different"),
         
-        Reminder(title: "Create PR when feature is complete", dueDate: Date().addingTimeInterval(80000.0), note: "blah blah"),
+            Reminder(id: UUID().uuidString, title: "Review usage analytics", dueDate: Date().addingTimeInterval(83000.0),
+                     note: "Discuss trends with management"),
         
-        Reminder(title: "Review the PR", dueDate: Date().addingTimeInterval(92000.0), note: "Arslan will review it", isComplete: true),
+            Reminder(id: UUID().uuidString, title: "Confirm group reservation", dueDate: Date().addingTimeInterval(92500.0),
+                     note: "Ask about space heaters"),
         
-        Reminder(title: "Merge the commit", dueDate: Date().addingTimeInterval(101000.0), note: "Good commit message")
-    ]
+            Reminder(id: UUID().uuidString, title: "Add beta testers to TestFlight", dueDate: Date().addingTimeInterval(101000.0),
+                     note: "v0.9 out on Friday")
+        ]
 }
