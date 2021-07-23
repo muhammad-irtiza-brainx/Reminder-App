@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D938FD1C26AAF7EF00742048 /* ErrorMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = D938FD1B26AAF7EF00742048 /* ErrorMessages.swift */; };
 		D95D36F6269EC4FC003B4CFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95D36F5269EC4FC003B4CFE /* AppDelegate.swift */; };
 		D95D36F8269EC4FC003B4CFE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95D36F7269EC4FC003B4CFE /* SceneDelegate.swift */; };
 		D95D36FA269EC4FC003B4CFE /* ReminderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95D36F9269EC4FC003B4CFE /* ReminderListViewController.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D938FD1B26AAF7EF00742048 /* ErrorMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessages.swift; sourceTree = "<group>"; };
 		D95D36F2269EC4FC003B4CFE /* Reminder-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Reminder-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D95D36F5269EC4FC003B4CFE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D95D36F7269EC4FC003B4CFE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				D95D371526A049FA003B4CFE /* Images.swift */,
+				D938FD1B26AAF7EF00742048 /* ErrorMessages.swift */,
 			);
 			path = Globals;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 				D95D370E269F0662003B4CFE /* ReminderListCell.swift in Sources */,
 				D95D36F6269EC4FC003B4CFE /* AppDelegate.swift in Sources */,
 				D95D372026A172ED003B4CFE /* ReminderDetailViewDataSource.swift in Sources */,
+				D938FD1C26AAF7EF00742048 /* ErrorMessages.swift in Sources */,
 				D95D373226A19B65003B4CFE /* ReminderDetailEditDataSource.swift in Sources */,
 				D95D371D26A080E4003B4CFE /* ReminderListDataSource.swift in Sources */,
 				D95D371226A010B4003B4CFE /* ReminderDetailViewController.swift in Sources */,

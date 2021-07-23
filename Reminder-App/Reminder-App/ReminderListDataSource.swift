@@ -16,7 +16,6 @@ class ReminderListDataSource: NSObject {
     
     // MARK: Public Properties
     var filter: Filter = .today
-    
     var filteredReminders: [Reminder] {
         return reminders.filter { filter.shouldInclude(date: $0.dueDate) }.sorted { $0.dueDate < $1.dueDate }
     }

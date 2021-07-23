@@ -23,6 +23,7 @@ class ReminderListViewController: UITableViewController {
     
     @IBAction func segmentControlChanged(_ sender: UISegmentedControl) {
         reminderListDataSource?.filter = filter
+        
         tableView.reloadData()
         self.refreshProgressView()
         refreshBackground()
@@ -53,15 +54,32 @@ class ReminderListViewController: UITableViewController {
                 return
             }
             
-            destination.configure(with: reminder,
-                                  editAction: {
+            destination.configure(with: reminder, editAction: {
                 reminder in
                 self.reminderListDataSource?.update(reminder, at: rowIndex) {
                     success in
+                    
                     if success {
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
                             self.refreshProgressView()
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            let alertTitle = NSLocalizedString(ErrorMessages.cannotUpdateReminderTitle, comment: ErrorMessages.errorUpdatingReminderTitle)
+                            let alertMessage = NSLocalizedString(ErrorMessages.errorInUpdatingReminder, comment: ErrorMessages.errorUpdatingReminderMessage)
+                            
+                            let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+                            let actionTitle = NSLocalizedString(ErrorMessages.okMessage, comment: ErrorMessages.okActionTitle)
+                            
+                            alert.addAction(UIAlertAction(title: actionTitle,
+                                                          style: .default,
+                                                          handler: {
+                                                            _ in
+                                                            self.dismiss(animated: true, completion: nil)
+                                                          }))
+                            
+                            self.present(alert, animated: true, completion: nil)
                         }
                     }
                 }
@@ -122,17 +140,17 @@ class ReminderListViewController: UITableViewController {
         detailViewController.configure(with: reminder,
                                        isNew: true,
                                        addAction: {
-            reminder in
-            self.reminderListDataSource?.add(reminder, completion: {
-                (index) in
-                if let index = index {
-                    DispatchQueue.main.async {
-                        self.tableView.insertRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
-                        self.refreshProgressView()
-                    } 
-                }
-            })
-        })
+                                        reminder in
+                                        self.reminderListDataSource?.add(reminder, completion: {
+                                            (index) in
+                                            if let index = index {
+                                                DispatchQueue.main.async {
+                                                    self.tableView.insertRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+                                                    self.refreshProgressView()
+                                                }
+                                            }
+                                        })
+                                       })
         
         let navigationController = UINavigationController(rootViewController: detailViewController)
         present(navigationController, animated: true, completion: nil)

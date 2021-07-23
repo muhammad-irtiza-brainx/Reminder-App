@@ -22,13 +22,11 @@ class ReminderListCell: UITableViewCell {
     // MARK: Actions
     @IBAction
     func doneButtonTriggered(_ sender: UIButton) {
-        
         doneButtonAction?()
     }
     
     // MARK: Public Methods
     func configure(title: String, dateText: String, isDone: Bool, doneButtonAction: @escaping DoneButtonAction) {
-        
         titleLabel.text = title
         dateLabel.text = dateText
         

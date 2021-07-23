@@ -37,6 +37,7 @@ extension EditTitleCell: UITextFieldDelegate {
             let title = (originalText as NSString).replacingCharacters(in: range, with: string)
             titleChangeAction?(title)
         }
+        
         return true
     }
 }

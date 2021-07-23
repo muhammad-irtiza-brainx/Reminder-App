@@ -38,6 +38,7 @@ extension EditNoteCell: UITextViewDelegate {
             let title = (originalText as NSString).replacingCharacters(in: range, with: text)
             noteChanegAction?(title)
         }
+        
         return true
     }
 }

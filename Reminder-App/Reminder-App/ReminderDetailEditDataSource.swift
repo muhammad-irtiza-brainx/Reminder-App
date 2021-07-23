@@ -66,8 +66,6 @@ class ReminderDetailEditDataSource: NSObject {
     
     // MARK: Private Properties
     private var reminderChangeAction: ReminderChangeAction?
-
-    // MARK: Private Properties
     private lazy var formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .full
@@ -114,6 +112,7 @@ class ReminderDetailEditDataSource: NSObject {
                 }
             }
         }
+        
         return cell
     }
 }
