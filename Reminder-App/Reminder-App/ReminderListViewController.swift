@@ -17,11 +17,13 @@ class ReminderListViewController: UITableViewController {
     @IBOutlet var percentCompleteHeightConstraint: NSLayoutConstraint!
     
     // MARK: Actions
-    @IBAction func addButtonTriggered(_ sender: UIBarButtonItem) {
+    @IBAction
+    func addButtonTriggered(_ sender: UIBarButtonItem) {
         addReminder()
     }
     
-    @IBAction func segmentControlChanged(_ sender: UISegmentedControl) {
+    @IBAction
+    func segmentControlChanged(_ sender: UISegmentedControl) {
         reminderListDataSource?.filter = filter
         
         tableView.reloadData()
@@ -36,57 +38,61 @@ class ReminderListViewController: UITableViewController {
     }
     
     // MARK: Public Properties
-    static let showDetailSegueIdentifier = "ShowReminderDetailSegue"
-    static let reminderListCellIdentifier = "ReminderListCell"
-    static let mainStoryboardName = "Main"
-    static let detailViewControllerIdentifier = "ReminderDetailViewController"
+    static let showDetailSegueIdentifier = GlobalIdentifiers.showReminderDetailSegueIdentifier
+    static let reminderListCellIdentifier = GlobalIdentifiers.reminderListCellIdentifier
+    static let mainStoryboardName = UIStoryboard.Name.Main.rawValue
+    static let detailViewControllerIdentifier = GlobalIdentifiers.reminderDetailViewControllerIdentifier
     
     // MARK: Overridden Methods
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Self.showDetailSegueIdentifier,
-           let destination = segue.destination as? ReminderDetailViewController,
-           let cell = sender as? UITableViewCell,
-           
-           let indexPath = tableView.indexPath(for: cell) {
-            let rowIndex = indexPath.row
-            
-            guard let reminder = reminderListDataSource?.reminder(at: rowIndex) else {
-                return
-            }
-            
-            destination.configure(with: reminder, editAction: {
-                reminder in
-                self.reminderListDataSource?.update(reminder, at: rowIndex) {
-                    success in
-                    
-                    if success {
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
-                            self.refreshProgressView()
-                        }
-                    } else {
-                        DispatchQueue.main.async {
-                            let alertTitle = NSLocalizedString(ErrorMessages.cannotUpdateReminderTitle, comment: ErrorMessages.errorUpdatingReminderTitle)
-                            let alertMessage = NSLocalizedString(ErrorMessages.errorInUpdatingReminder, comment: ErrorMessages.errorUpdatingReminderMessage)
-                            
-                            let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-                            let actionTitle = NSLocalizedString(ErrorMessages.okMessage, comment: ErrorMessages.okActionTitle)
-                            
-                            alert.addAction(UIAlertAction(title: actionTitle,
-                                                          style: .default,
-                                                          handler: {
-                                                            _ in
-                                                            self.dismiss(animated: true, completion: nil)
-                                                          }))
-                            
-                            self.present(alert, animated: true, completion: nil)
-                        }
-                    }
-                }
-            })
+        
+        guard segue.identifier == Self.showDetailSegueIdentifier,
+              let destination = segue.destination as? ReminderDetailViewController,
+              let cell = sender as? UITableViewCell,
+              let indexPath = tableView.indexPath(for: cell) else {
+            return
         }
+        
+        let rowIndex = indexPath.row
+        
+        guard let reminder = reminderListDataSource?.reminder(at: rowIndex) else {
+            return
+        }
+        
+        destination.configure(with: reminder,
+                              editAction: {
+                                reminder in
+                                self.reminderListDataSource?.update(reminder, at: rowIndex) {
+                                    success in
+                                    
+                                    if success {
+                                        DispatchQueue.main.async {
+                                            self.tableView.reloadData()
+                                            self.refreshProgressView()
+                                        }
+                                    } else {
+                                        DispatchQueue.main.async {
+                                            let alertTitle = NSLocalizedString(ErrorMessages.cannotUpdateReminderTitle, comment: ErrorMessages.errorUpdatingReminderTitle)
+                                            let alertMessage = NSLocalizedString(ErrorMessages.errorInUpdatingReminder, comment: ErrorMessages.errorUpdatingReminderMessage)
+                                            
+                                            let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+                                            let actionTitle = NSLocalizedString(ErrorMessages.okMessage, comment: ErrorMessages.okActionTitle)
+                                            
+                                            alert.addAction(UIAlertAction(title: actionTitle,
+                                                                          style: .default,
+                                                                          handler: {
+                                                                            _ in
+                                                                            self.dismiss(animated: true, completion: nil)
+                                                                          }))
+                                            
+                                            self.present(alert, animated: true, completion: nil)
+                                        }
+                                    }
+                                }
+                              })
     }
-    
+
+
     // MARK: Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -163,7 +169,6 @@ class ReminderListViewController: UITableViewController {
         
         let totalHeight = progressContainerView.bounds.size.height
         percentCompleteHeightConstraint.constant = totalHeight * CGFloat(percentComplete)
-        
         UIView.animate(withDuration: 0.2) {
             self.progressContainerView.layoutSubviews()
         }
@@ -174,17 +179,17 @@ class ReminderListViewController: UITableViewController {
         let backgroundView = UIView()
         tableView.backgroundView = backgroundView
         
-        if let backgroundColors = filter.backgroundColors {
-            let gradientBackgroundLayer = CAGradientLayer()
-            gradientBackgroundLayer.colors = backgroundColors
-            gradientBackgroundLayer.frame = tableView.frame
-            
-            backgroundView.layer.addSublayer(gradientBackgroundLayer)
-        } else {
+        guard let backgroundColors = filter.backgroundColors else {
             backgroundView.backgroundColor = filter.substituteBackgroundColor
+            tableView.backgroundView = backgroundView
+            return
         }
         
-        tableView.backgroundView = backgroundView
+        let gradientBackgroundLayer = CAGradientLayer()
+        gradientBackgroundLayer.colors = backgroundColors
+        gradientBackgroundLayer.frame = tableView.frame
+        
+        backgroundView.layer.addSublayer(gradientBackgroundLayer)
     }
 }
 
@@ -194,19 +199,19 @@ fileprivate extension ReminderListDataSource.Filter {
     private var gradientBeginColor: UIColor? {
         switch self {
         case .today:
-            return UIColor(named: "LIST_GradientTodayBegin")
+            return GlobalColors.listGradientTodayBeginColor
         case .future:
-            return UIColor(named: "LIST_GradientFutureBegin")
+            return GlobalColors.listGradientFutureBeginColor
         case .all:
-            return UIColor(named: "LIST_GradientAllBegin")
+            return GlobalColors.listGradientAllBeginColor
         }
     }
     
     private var gradientEndColor: UIColor? {
         switch self {
-        case .today: return UIColor(named: "LIST_GradientTodayEnd")
-        case .future: return UIColor(named: "LIST_GradientFutureEnd")
-        case .all: return UIColor(named: "LIST_GradientAllEnd")
+        case .today: return GlobalColors.listGradientTodayEndColor
+        case .future: return GlobalColors.listGradientFutureEndColor
+        case .all: return GlobalColors.listGradientAllEndColor
         }
     }
     

@@ -67,10 +67,10 @@ class ReminderDetailViewController: UITableViewController {
         
         if editing {
             trainsitionToEditMode(reminder)
-            tableView.backgroundColor = UIColor(named: "EDIT_Background")
+            tableView.backgroundColor = GlobalColors.editBackgroundColor
         } else {
             transitionToView(reminder)
-            tableView.backgroundColor = UIColor(named: "VIEW_Background")
+            tableView.backgroundColor = GlobalColors.viewBackgroundColor
         }
         
         tableView.dataSource = dataSource
@@ -79,17 +79,20 @@ class ReminderDetailViewController: UITableViewController {
     
     // MARK: File Private Methods
     fileprivate func transitionToView(_ reminder: Reminder) {
-        if let temporaryReminder = temporaryReminder {
-            self.reminder = temporaryReminder
-            self.temporaryReminder = nil
-            
-            reminderEditAction?(temporaryReminder)
-            dataSource = ReminderDetailViewDataSource(reminder: temporaryReminder)
-        } else {
+        guard let temporaryReminder = temporaryReminder else {
             dataSource = ReminderDetailViewDataSource(reminder: reminder)
+            navigationItem.title = NSLocalizedString(GlobalStrings.viewReminderString, comment: GlobalStrings.viewReminderNavTitleString)
+            navigationItem.leftBarButtonItem = nil
+            editButtonItem.isEnabled = true
+            return
         }
         
-        navigationItem.title = NSLocalizedString("View Reminder", comment: "view reminder nav title")
+        self.reminder = temporaryReminder
+        self.temporaryReminder = nil
+        reminderEditAction?(temporaryReminder)
+        dataSource = ReminderDetailViewDataSource(reminder: temporaryReminder)
+        
+        navigationItem.title = NSLocalizedString(GlobalStrings.viewReminderString, comment: GlobalStrings.viewReminderNavTitleString)
         navigationItem.leftBarButtonItem = nil
         editButtonItem.isEnabled = true
     }
@@ -110,7 +113,7 @@ class ReminderDetailViewController: UITableViewController {
             self.editButtonItem.isEnabled = true
         }
         
-        navigationItem.title = isNew ? NSLocalizedString("Add Reminder", comment: "add reminder nav title") : NSLocalizedString("Edit Reminder", comment: "edit reminder nav title")
+        navigationItem.title = isNew ? NSLocalizedString(GlobalStrings.addReminderString, comment: GlobalStrings.addReminderNavTitleString) : NSLocalizedString(GlobalStrings.editReminderString, comment: GlobalStrings.editReminderNavTitleString)
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonTrigger))
     }
 }
@@ -120,14 +123,14 @@ extension ReminderDetailViewController {
     // MARK: Overridden Methods
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if isEditing {
-            cell.backgroundColor = UIColor(named: "EDIT_TableRowBackground")
+            cell.backgroundColor = GlobalColors.editTableRowBackgroundColor
             
             guard let editSection = ReminderDetailEditDataSource.ReminderSection(rawValue: indexPath.section) else {
                 return
             }
             
             if editSection == .dueDate, indexPath.row == 0 {
-                cell.textLabel?.textColor = UIColor(named: "EDIT_DateLabelText")
+                cell.textLabel?.textColor = GlobalColors.editDateLabelTextColor
                 cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
             }
         } else {

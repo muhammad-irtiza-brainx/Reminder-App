@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D92C03F626B277F60042237C /* ReminderPropertyStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92C03F526B277F60042237C /* ReminderPropertyStrings.swift */; };
+		D92C03F826B298250042237C /* GlobalColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92C03F726B298250042237C /* GlobalColors.swift */; };
+		D92C03FA26B29CB80042237C /* GlobalStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92C03F926B29CB80042237C /* GlobalStrings.swift */; };
+		D92C03FC26B2A3FD0042237C /* GlobalIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92C03FB26B2A3FD0042237C /* GlobalIdentifiers.swift */; };
+		D92C03FE26B2A4B90042237C /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92C03FD26B2A4B90042237C /* UIStoryboard.swift */; };
 		D938FD1C26AAF7EF00742048 /* ErrorMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = D938FD1B26AAF7EF00742048 /* ErrorMessages.swift */; };
 		D95D36F6269EC4FC003B4CFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95D36F5269EC4FC003B4CFE /* AppDelegate.swift */; };
 		D95D36F8269EC4FC003B4CFE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95D36F7269EC4FC003B4CFE /* SceneDelegate.swift */; };
@@ -28,6 +33,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D92C03F526B277F60042237C /* ReminderPropertyStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderPropertyStrings.swift; sourceTree = "<group>"; };
+		D92C03F726B298250042237C /* GlobalColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalColors.swift; sourceTree = "<group>"; };
+		D92C03F926B29CB80042237C /* GlobalStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalStrings.swift; sourceTree = "<group>"; };
+		D92C03FB26B2A3FD0042237C /* GlobalIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalIdentifiers.swift; sourceTree = "<group>"; };
+		D92C03FD26B2A4B90042237C /* UIStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboard.swift; sourceTree = "<group>"; };
 		D938FD1B26AAF7EF00742048 /* ErrorMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessages.swift; sourceTree = "<group>"; };
 		D95D36F2269EC4FC003B4CFE /* Reminder-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Reminder-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D95D36F5269EC4FC003B4CFE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -104,6 +114,10 @@
 			children = (
 				D95D371526A049FA003B4CFE /* Images.swift */,
 				D938FD1B26AAF7EF00742048 /* ErrorMessages.swift */,
+				D92C03F526B277F60042237C /* ReminderPropertyStrings.swift */,
+				D92C03F726B298250042237C /* GlobalColors.swift */,
+				D92C03F926B29CB80042237C /* GlobalStrings.swift */,
+				D92C03FB26B2A3FD0042237C /* GlobalIdentifiers.swift */,
 			);
 			path = Globals;
 			sourceTree = "<group>";
@@ -123,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				D9ABF9F626A1D6180075549C /* UITableViewCell.swift */,
+				D92C03FD26B2A4B90042237C /* UIStoryboard.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -198,8 +213,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D95D372926A19188003B4CFE /* EditTitleCell.swift in Sources */,
+				D92C03F826B298250042237C /* GlobalColors.swift in Sources */,
 				D95D372F26A192D0003B4CFE /* EditNotesCell.swift in Sources */,
+				D92C03F626B277F60042237C /* ReminderPropertyStrings.swift in Sources */,
 				D95D371626A049FA003B4CFE /* Images.swift in Sources */,
+				D92C03FA26B29CB80042237C /* GlobalStrings.swift in Sources */,
 				D95D36FA269EC4FC003B4CFE /* ReminderListViewController.swift in Sources */,
 				D95D372C26A19221003B4CFE /* EditDateCell.swift in Sources */,
 				D95D370E269F0662003B4CFE /* ReminderListCell.swift in Sources */,
@@ -210,7 +228,9 @@
 				D95D371D26A080E4003B4CFE /* ReminderListDataSource.swift in Sources */,
 				D95D371226A010B4003B4CFE /* ReminderDetailViewController.swift in Sources */,
 				D95D36F8269EC4FC003B4CFE /* SceneDelegate.swift in Sources */,
+				D92C03FE26B2A4B90042237C /* UIStoryboard.swift in Sources */,
 				D95D370B269ECC69003B4CFE /* Reminder.swift in Sources */,
+				D92C03FC26B2A3FD0042237C /* GlobalIdentifiers.swift in Sources */,
 				D9ABF9F726A1D6180075549C /* UITableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

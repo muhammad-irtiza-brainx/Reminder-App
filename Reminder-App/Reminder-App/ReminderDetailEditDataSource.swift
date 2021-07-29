@@ -20,7 +20,7 @@ class ReminderDetailEditDataSource: NSObject {
         func cellIdentifier(for row: Int) -> String {
             switch self {
             case .title:
-                return "EditTitleCell"
+                return EditTitleCell.reusableIdentifier
             case .dueDate:
                 return row == 0 ? "EditDateLabelCell" : "EditDateCell"
             case .note:
@@ -32,11 +32,11 @@ class ReminderDetailEditDataSource: NSObject {
         var displayText: String {
             switch self {
             case .title:
-                return "Title"
+                return ReminderPropertyStrings.titleString
             case .dueDate:
-                return "Date"
+                return ReminderPropertyStrings.dateString
             case .note:
-                return "note"
+                return ReminderPropertyStrings.noteString
             }
         }
     
@@ -84,13 +84,18 @@ class ReminderDetailEditDataSource: NSObject {
         
         switch section {
         case .title:
-            if let titleCell = cell as? EditTitleCell {
-                titleCell.configure(title: reminder.title) {
-                    title in
-                    self.reminder.title = title
-                    self.reminderChangeAction?(self.reminder)
-                }
+            guard let titleCell = cell as? EditTitleCell else {
+                break
             }
+            
+            titleCell.configure(title: reminder.title) {
+                title in
+                self.reminder.title = title
+                self.reminderChangeAction?(self.reminder)
+            }
+//            if let titleCell = cell as? EditTitleCell {
+//
+//            }
         case .dueDate:
             if indexPath.row == 0 {
                 cell.textLabel?.text = formatter.string(from: reminder.dueDate)
@@ -104,13 +109,18 @@ class ReminderDetailEditDataSource: NSObject {
                 }
             }
         case .note:
-            if let noteCell = cell as? EditNoteCell {
-                noteCell.configure(note: reminder.note) {
-                    note in
-                    self.reminder.note = note
-                    self.reminderChangeAction?(self.reminder)
-                }
+            guard let noteCell = cell as? EditNoteCell else {
+                break
             }
+            
+            noteCell.configure(note: reminder.note) {
+                note in
+                self.reminder.note = note
+                self.reminderChangeAction?(self.reminder)
+            }
+//            if let noteCell = cell as? EditNoteCell {
+//
+//            }
         }
         
         return cell

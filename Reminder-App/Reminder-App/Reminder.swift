@@ -13,6 +13,6 @@ struct Reminder {
     var id: String
     var title: String
     var dueDate: Date
-    var note: String? = nil
+    var note: String?
     var isComplete: Bool = false
 }
