@@ -9,14 +9,14 @@ import UIKit
 
 class ReminderListViewController: UITableViewController {
     
-    // MARK: Outlets
+    // MARK: IBOutlets
     @IBOutlet var filterSegmentedControl: UISegmentedControl!
     @IBOutlet var progressContainerView: UIView!
     @IBOutlet var percentIncompleteView: UIView!
     @IBOutlet var percentCompleteView: UIView!
     @IBOutlet var percentCompleteHeightConstraint: NSLayoutConstraint!
     
-    // MARK: Actions
+    // MARK: IBActions
     @IBAction
     func addButtonTriggered(_ sender: UIBarButtonItem) {
         addReminder()
@@ -188,7 +188,6 @@ class ReminderListViewController: UITableViewController {
         let gradientBackgroundLayer = CAGradientLayer()
         gradientBackgroundLayer.colors = backgroundColors
         gradientBackgroundLayer.frame = tableView.frame
-        
         backgroundView.layer.addSublayer(gradientBackgroundLayer)
     }
 }

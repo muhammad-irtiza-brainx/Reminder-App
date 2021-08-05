@@ -93,9 +93,6 @@ class ReminderDetailEditDataSource: NSObject {
                 self.reminder.title = title
                 self.reminderChangeAction?(self.reminder)
             }
-//            if let titleCell = cell as? EditTitleCell {
-//
-//            }
         case .dueDate:
             if indexPath.row == 0 {
                 cell.textLabel?.text = formatter.string(from: reminder.dueDate)
@@ -118,9 +115,6 @@ class ReminderDetailEditDataSource: NSObject {
                 self.reminder.note = note
                 self.reminderChangeAction?(self.reminder)
             }
-//            if let noteCell = cell as? EditNoteCell {
-//
-//            }
         }
         
         return cell

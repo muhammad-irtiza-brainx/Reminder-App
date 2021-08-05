@@ -10,6 +10,5 @@ import UIKit
 struct GlobalIdentifiers {
     static let showReminderDetailSegueIdentifier = "ShowReminderDetailSegue"
     static let reminderListCellIdentifier = "ReminderListCell"
-//    static let mainIdentifier = "Main"
     static let reminderDetailViewControllerIdentifier = "ReminderDetailViewController"
 }
